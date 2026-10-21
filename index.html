@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0756a3">
+    <meta name="description" content="Find bus stops and published bus timings in Nalasopara, Vasai and Virar.">
+    <title>BusReach | Find Your Bus Stop</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="index.html" aria-label="BusReach home">
+            <span class="brand-icon" aria-hidden="true">🚌</span>
+            <span>
+                <strong>BusReach</strong>
+                <small>Local bus stop directory</small>
+            </span>
+        </a>
+
+        <nav class="navlinks" aria-label="Main navigation">
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="suggest.html">Suggest a stop</a>
+            <a href="admin.html">Admin</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">LOCAL TRANSPORT DIRECTORY</p>
+                <h1>Find your bus stop.</h1>
+                <p>
+                    Search published bus stops and available timings
+                    around Nalasopara, Vasai and Virar.
+                </p>
+            </div>
+        </section>
+
+        <section class="container search-panel panel" aria-labelledby="searchTitle">
+            <div class="section-heading">
+                <div>
+                    <h2 id="searchTitle">Where do you want to go?</h2>
+                    <p class="muted small">
+                        Search by stop name, locality, route or destination.
+                    </p>
+                </div>
+            </div>
+
+            <form id="searchForm" class="search-form" onsubmit="return false;">
+                <label class="search-label" for="search">Bus stop or destination</label>
+
+                <div class="main-search-row">
+                    <input id="search" name="search" type="search" placeholder="Try Nalasopara, Vasai or Virar"
+                        autocomplete="off">
+                    <button type="button" id="searchButton">Search</button>
+                </div>
+
+                <div class="search-actions">
+                    <button type="button" id="nearby" class="secondary">
+                        Use my location
+                    </button>
+                    <button type="button" id="clear" class="secondary">
+                        Clear filters
+                    </button>
+                </div>
+
+                <details class="filter-details">
+                    <summary>More filters</summary>
+
+                    <div class="filter-fields">
+                        <label for="area">
+                            Area
+                            <select id="area" name="area">
+                                <option value="">All study areas</option>
+                                <option value="Nalasopara">Nalasopara</option>
+                                <option value="Vasai">Vasai</option>
+                                <option value="Virar">Virar</option>
+                            </select>
+                        </label>
+
+                        <label for="timingType">
+                            Bus timing
+                            <select id="timingType" name="timingType">
+                                <option value="">All timings</option>
+                                <option value="arrival">Arrival</option>
+                                <option value="departure">Departure</option>
+                            </select>
+                        </label>
+                    </div>
+                </details>
+            </form>
+
+            <p id="status" class="status-message" role="status" aria-live="polite">
+                Loading bus stops…
+            </p>
+        </section>
+
+        <section class="container directory" aria-labelledby="directoryTitle">
+            <div class="directory-heading">
+                <div>
+                    <h2 id="directoryTitle">Bus stops</h2>
+                    <p class="muted small">
+                        Only published stops in the study area are shown.
+                    </p>
+                </div>
+                <p id="count" class="result-count" aria-live="polite">Loading…</p>
+            </div>
+
+            <div class="content-grid">
+                <section class="results-column" aria-label="Bus stop results">
+                    <div id="stops" class="place-list">
+                        <p class="empty">Loading published bus stops…</p>
+                    </div>
+                </section>
+
+                <aside class="map-column" aria-label="Bus stop map">
+                    <div class="map-heading">
+                        <h2>Map</h2>
+                        <p class="muted small">Select a stop to locate it.</p>
+                    </div>
+                    <div id="map" aria-label="Map of bus stops"></div>
+                    <p class="muted small map-note">
+                        Map data © OpenStreetMap contributors.
+                        Locations and timings may need verification.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <section class="container suggestion-strip">
+            <div>
+                <h2>Missing a bus stop?</h2>
+                <p class="muted">
+                    Submit a suggestion for review. It will not appear publicly
+                    until an administrator verifies it.
+                </p>
+            </div>
+            <a class="button" href="suggest.html">Suggest a stop</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <a class="footer-brand" href="index.html">BusReach</a>
+            <p>Student transport project for Nalasopara, Vasai and Virar.</p>
+            <div class="footer-links">
+                <a href="suggest.html">Suggest a stop</a>
+                <a href="admin.html">Admin</a>
+            </div>
+            <p class="small">
+                Verify bus timings with the relevant transport operator.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        document.getElementById("searchButton")?.addEventListener("click", () => {
+            document.getElementById("search")?.dispatchEvent(
+                new Event("input", { bubbles: true })
+            );
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BusReach Admin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">RESTRICTED ADMIN WORKSPACE</p>
+            <h1>BusReach administration</h1>
+            <p class="muted">Review public suggestions, manage bus stops and publish verified schedules.</p>
+        </div><a class="button secondary" href="index.html">Public dashboard</a>
+    </header>
+    <main class="container">
+        <section class="panel" id="loginPanel">
+            <h2>Administrator sign in</h2>
+            <form id="loginForm" class="form-grid"><label>Admin email<input name="email" type="email" required
+                        autocomplete="username"></label><label>Password<input name="password" type="password" required
+                        autocomplete="current-password"></label><button type="submit">Sign in</button>
+                <p class="muted small">No public admin registration. The account must be authorized in Supabase.</p>
+                <p id="loginStatus" role="status"></p>
+            </form>
+        </section>
+        <div id="dashboard" hidden>
+            <section class="panel">
+                <div class="section-heading">
+                    <h2>Review suggested bus stops</h2><button id="signOut" class="secondary">Sign out</button>
+                </div>
+                <div id="suggestions" class="place-list">
+                    <p class="empty">Loading suggestions…</p>
+                </div>
+            </section>
+            <section class="panel">
+                <h2>Add or edit a bus stop</h2>
+                <form id="stopForm" class="form-grid"><input type="hidden" name="id"><label>Bus stop name *<input
+                            name="name" required maxlength="160"></label><label>Address / road / landmark *<textarea
+                            name="address" required rows="2" maxlength="500"></textarea></label><label>Area / locality
+                        *<input name="area" required maxlength="120"></label><label>Nearby landmark<input
+                            name="landmark" maxlength="200"></label>
+                    <div class="two-fields"><label>Latitude<input name="latitude" type="number" step="any" min="-90"
+                                max="90"></label><label>Longitude<input name="longitude" type="number" step="any"
+                                min="-180" max="180"></label></div>
+                    <div class="actions"><button type="button" id="capture">Capture current location</button><button
+                            type="button" id="mapsHelp" class="secondary">Open Google Maps</button></div><label>Stop
+                        photo (JPG, PNG or WebP, max 5 MB)<input name="photo" type="file"
+                            accept="image/jpeg,image/png,image/webp"></label><label>Existing photo URL (optional)<input
+                            name="photo_url" type="url" maxlength="1000"></label><label>Accessibility
+                        observations<textarea name="accessibility_notes" rows="2" maxlength="1000"
+                            placeholder="Shelter, seating, ramp, footpath, crossing, lighting etc."></textarea></label><label>Verification
+                        status *<select name="verification_status" required>
+                            <option>Needs recheck</option>
+                            <option>Field verified</option>
+                            <option>Contact verified</option>
+                            <option>Field and contact verified</option>
+                        </select></label><label>Verification notes *<textarea name="verification_notes" required
+                            rows="2" maxlength="1000"
+                            placeholder="What was checked and when?"></textarea></label><label>Survey date<input
+                            name="survey_date" type="date"></label><label class="inline-check"><input name="published"
+                            type="checkbox"> Publish after saving (only after verification)</label>
+                    <div class="actions"><button type="submit">Save bus stop</button><button type="button"
+                            id="resetStop" class="secondary">Clear form</button></div>
+                    <p id="stopStatus" role="status"></p>
+                </form>
+            </section>
+            <section class="panel">
+                <h2>Add a bus timing</h2>
+                <p class="muted small">Enter a published timetable time and record its source. This does not track a
+                    moving bus or calculate a live arrival.</p>
+                <form id="timingForm" class="form-grid"><input type="hidden" name="id"><label>Bus stop *<select
+                            name="stop_id" required>
+                            <option value="">Choose a stop</option>
+                        </select></label>
+                    <div class="two-fields"><label>Route number / code *<input name="route_number" required
+                                maxlength="40"></label><label>Destination *<input name="destination" required
+                                maxlength="160" placeholder="Direction or destination"></label></div>
+                    <div class="two-fields"><label>Scheduled time *<input name="scheduled_time" type="time"
+                                required></label><label>Service days *<select name="service_days" required>
+                                <option>Daily</option>
+                                <option>Weekdays</option>
+                                <option>Weekends</option>
+                                <option>Monday–Saturday</option>
+                                <option>Sunday</option>
+                                <option>See notes</option>
+                            </select></label></div><label>Timetable source *<input name="source" required
+                            maxlength="300"
+                            placeholder="Official timetable, operator notice, field observation…"></label><label>Last
+                        checked date *<input name="last_verified" type="date" required></label><label>Notes
+                        (optional)<textarea name="notes" rows="2" maxlength="1000"></textarea></label><label
+                        class="inline-check"><input name="published" type="checkbox"> Publish this timing</label>
+                    <div class="actions"><button type="submit">Save timing</button><button type="button"
+                            id="resetTiming" class="secondary">Clear form</button></div>
+                    <p id="timingStatus" role="status"></p>
+                </form>
+            </section>
+            <section class="panel">
+                <h2>Bus stop records</h2>
+                <div id="stops" class="place-list">
+                    <p class="empty">Loading records…</p>
+                </div>
+            </section>
+            <section class="panel">
+                <h2>Bus timing records</h2>
+                <div id="timings" class="place-list">
+                    <p class="empty">Loading records…</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

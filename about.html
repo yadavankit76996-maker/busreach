@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About BusReach</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">PROJECT DOCUMENTATION</p>
+            <h1>About BusReach</h1>
+            <p class="muted">Public transport accessibility field project</p>
+        </div><a class="button secondary" href="index.html">Back to dashboard</a>
+    </header>
+    <main class="container narrow">
+        <section class="panel">
+            <h2>Purpose</h2>
+            <p>BusReach is a student field-project website designed to help people discover bus stops in the study area,
+                check published timing information and find nearby stops when location permission is granted.</p>
+            <h2>How to use the dashboard</h2>
+            <ul>
+                <li>Search by bus stop name, road, landmark, area or route information.</li>
+                <li>Select <strong>Use my location</strong> and allow browser location access to sort mapped stops by
+                    distance.</li>
+                <li>Open directions for a stop with coordinates.</li>
+                <li>Use <strong>Suggest a bus stop</strong> to send a missing location or correction. Suggestions are
+                    reviewed by an administrator before publication.</li>
+            </ul>
+            <h2>Data and reliability</h2>
+            <p>BusReach only displays records published by the project administrator. A schedule entry should include
+                its information source and the date it was checked. A scheduled time is not a live arrival prediction.
+                Live estimates should only be shown if a reliable real-time data source is actually connected.</p>
+            <p>Distances are approximate straight-line distances from the device location, not walking distance or
+                travel time. Map and location features require an internet connection; browser location requires
+                permission and a secure hosted website or localhost.</p>
+            <h2>Technologies used</h2>
+            <ul>
+                <li><strong>HTML:</strong> page structure and forms.</li>
+                <li><strong>CSS:</strong> layout, responsive styling and readability.</li>
+                <li><strong>JavaScript:</strong> search, distance sorting, form validation and dashboard behaviour.</li>
+                <li><strong>Supabase:</strong> hosted PostgreSQL database, authentication and image storage.</li>
+                <li><strong>Leaflet and OpenStreetMap:</strong> interactive map display and map tiles.</li>
+                <li><strong>GitHub Pages:</strong> static website hosting, if used for deployment.</li>
+            </ul>
+            <h2>Administration and privacy</h2>
+            <p>Only authorized admin accounts can publish stops and timings. Public users can send suggestions but
+                cannot publish them directly. Use only appropriate public place photos; avoid photos containing
+                identifiable people, private information or vehicle registration details where possible.</p>
+            <h2>Project limits</h2>
+            <p>This dashboard does not automatically know where a bus is. Arrival times depend on the verified schedule
+                data entered by the admin or on a real-time transport feed if one becomes available. Do not rely on this
+                student project for emergency travel decisions.</p>
+            <p><a href="suggest.html">Suggest a bus stop</a> · <a href="admin.html">Administrator sign in</a></p>
+        </section>
+    </main>
+</body>
+
+</html>

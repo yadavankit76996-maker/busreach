@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#123b67">
+    <title>Suggest a Bus Stop | BusReach</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">BUSREACH · COMMUNITY CONTRIBUTIONS</p>
+            <h1>Suggest a bus stop</h1>
+            <p class="muted">Help people discover nearby bus stops. Your submission will be reviewed before publication.
+            </p>
+        </div>
+        <a class="button secondary" href="index.html">← Back to dashboard</a>
+    </header>
+
+    <main class="container narrow">
+        <form id="suggestForm" class="panel form-grid">
+            <div>
+                <p class="eyebrow">01 · STOP DETAILS</p>
+                <h2>Bus stop information</h2>
+            </div>
+
+            <label>Bus stop name *
+                <input name="name" required maxlength="160" placeholder="Enter the bus stop name">
+            </label>
+
+            <div>
+                <p class="eyebrow">02 · LOCATION</p>
+                <p class="muted small">
+                    Click the button to fill your address and coordinates.
+                    Check the results before submitting.
+                </p>
+            </div>
+
+            <div class="actions">
+                <button type="button" id="capture">◎ Use my current location</button>
+                <button type="button" id="mapsHelp" class="secondary">Open map</button>
+            </div>
+
+            <label>Full address / road / landmark *
+                <textarea name="address" required rows="3" maxlength="500"
+                    placeholder="Automatically filled from your location; you can edit it"></textarea>
+            </label>
+
+            <label>Area / locality *
+                <input name="area" required maxlength="120" placeholder="Automatically filled from your location">
+            </label>
+
+            <label>Nearby landmark
+                <input name="landmark" maxlength="200" placeholder="Automatically filled if a mapped place is found">
+            </label>
+
+            <div class="two-fields">
+                <label>Latitude
+                    <input name="latitude" type="number" step="any" min="-90" max="90" placeholder="GPS latitude">
+                </label>
+
+                <label>Longitude
+                    <input name="longitude" type="number" step="any" min="-180" max="180" placeholder="GPS longitude">
+                </label>
+            </div>
+
+            <p class="muted small">
+                Location access requires your permission. Address and landmark
+                results depend on available map data and should be verified.
+            </p>
+
+            <div>
+                <p class="eyebrow">03 · STOP PHOTO</p>
+                <h2>Upload a photo</h2>
+            </div>
+
+            <label>Bus stop photo (optional)
+                <input id="stopPhoto" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            </label>
+
+            <p class="muted small">JPG, PNG, WEBP or GIF. Maximum size: 5 MB.</p>
+
+            <div id="photoPreviewWrap" hidden>
+                <img id="photoPreview" class="stop-photo" alt="Selected bus stop photo preview">
+                <button type="button" id="removePhoto" class="secondary">
+                    Remove photo
+                </button>
+            </div>
+
+            <div>
+                <p class="eyebrow">04 · VERIFICATION</p>
+            </div>
+
+            <label>How do you know this information? *
+                <textarea name="source_details" required rows="3" maxlength="1000"
+                    placeholder="Explain whether you visited the stop and when you checked the details"></textarea>
+            </label>
+
+            <label>Additional notes (optional)
+                <textarea name="notes" rows="2" maxlength="1000" placeholder="Any other useful information"></textarea>
+            </label>
+
+            <button type="submit">Submit for review →</button>
+
+            <p class="muted small">
+                Your suggestion will not appear publicly until an administrator
+                reviews and approves it.
+            </p>
+
+            <p id="suggestStatus" role="status" aria-live="polite"></p>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="suggest.js"></script>
+</body>
+
+</html>
